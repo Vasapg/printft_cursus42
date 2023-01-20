@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 15:58:41 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:38:18 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libftprintf.h"
@@ -25,7 +25,7 @@ int	convert(char c, va_list args)
 	if (c == '%')
 		ft_putchar_fd(c, 1);
 	if (c == 'u')
-		return 1;
+		ft_putnbr_fd(va_arg(args, unsigned int), 1);
 	if (c == 'x')
 		return 1;
 	else
