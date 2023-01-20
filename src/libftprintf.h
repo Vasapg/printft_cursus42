@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:09:30 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 15:56:17 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:09:38 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"../libft/libft.h"
@@ -14,3 +14,4 @@
 
 int		ft_printf(char const *, ...);
 int		convert(char c, va_list args);
+char	*itoh(int nb, int mode);

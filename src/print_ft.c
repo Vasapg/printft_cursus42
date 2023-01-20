@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 17:38:18 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:18:25 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libftprintf.h"
@@ -27,10 +27,41 @@ int	convert(char c, va_list args)
 	if (c == 'u')
 		ft_putnbr_fd(va_arg(args, unsigned int), 1);
 	if (c == 'x')
-		return 1;
+		ft_putstr_fd(itoh(va_arg(args, int), 1), 1);
+	if (c == 'X')
+		ft_putstr_fd(itoh(va_arg(args, int), 0), 1);
 	else
 		error = 1;
 	return (error);
+}
+
+char	*itoh(int nb, int mode)
+{
+	char 	*res;
+	int		i;
+	int 	aux;
+	char	*hex;
+
+	hex  = "0123456789ABCDEF";
+	aux = nb;
+	i = 0;
+	while (aux != 0)
+	{
+		aux  = aux/16;
+		i++;
+	}
+	res = malloc(sizeof(char) * (i + 1));
+	res[i + 1] = '\0';
+	i--;
+	while (nb != 0)
+	{
+		if (nb % 16 > 9 && mode)
+			res[i--] = ft_tolower(hex[nb % 16]);
+		else
+			res[i--] = hex[nb % 16];
+		nb  = nb / 16;
+	}	
+	return (res);
 }
 
 int ft_printf(char const * format, ...)
@@ -47,7 +78,8 @@ int ft_printf(char const * format, ...)
 		else
 		{
 			i++;
-			convert(format[i], args);
+			if (convert(format[i], args) == -1)
+				ft_putstr_fd("ERROR: formato invalido\n", 1);
 		}
 		i++;
 	}
