@@ -25,39 +25,24 @@ int	convert(char c, va_list args)
 	if (c == 'u')
 		ft_putnbr_fd(va_arg(args, unsigned int), 1);
 	if (c == 'x')
-		ft_putstr_fd(itoh(va_arg(args, int), 1), 1);
+		ft_putstr_fd(ft_itoh(va_arg(args, int), 1), 1);
 	if (c == 'X')
-		ft_putstr_fd(itoh(va_arg(args, int), 0), 1);
+		ft_putstr_fd(ft_itoh(va_arg(args, int), 0), 1);
 	return (1);
 }
 
-char	*itoh(int nb, int mode)
+int	arg_length(va_list arg, char c)
 {
-	char 	*res;
-	int		i;
-	int 	aux;
-	char	*hex;
-
-	hex  = "0123456789ABCDEF";
-	aux = nb;
-	i = 0;
-	while (aux != 0)
-	{
-		aux  = aux/16;
-		i++;
-	}
-	res = malloc(sizeof(char) * (i + 1));
-	res[i + 1] = '\0';
-	i--;
-	while (nb != 0)
-	{
-		if (nb % 16 > 9 && mode)
-			res[i--] = ft_tolower(hex[nb % 16]);
-		else
-			res[i--] = hex[nb % 16];
-		nb  = nb / 16;
-	}	
-	return (res);
+	if (c == '%' || c == 'c')
+		return (1);
+	if (c == 'd' || c== 'i')
+		return (ft_strlen(ft_itoa(va_arg(arg, int))));
+	if (c == 's')
+		return (ft_strlen(va_arg(arg, char *)));
+	if (c == 'x' || c == 'X')
+		return (ft_strlen(ft_itoh(va_arg(arg, int), 1)));
+	else
+		return (0);
 }
 
 int ft_printf(char const * format, ...)
@@ -72,7 +57,10 @@ int ft_printf(char const * format, ...)
 		if (format[i] != '%')
 			ft_putchar_fd(format[i], 1);
 		else if (ft_strchr("cspdiuxX%", format[++i])!=NULL)
+		{
+			//TODO: CALL LENGHT FUNCTION FOR VA_COPY
 			convert(format[i], args);
+		}
 		else
 		{
 			ft_putchar_fd(format[i - 1], 1);

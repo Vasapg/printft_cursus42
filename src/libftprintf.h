@@ -14,4 +14,5 @@
 
 int		ft_printf(char const *, ...);
 int		convert(char c, va_list args);
-char	*itoh(int nb, int mode);
+char	*ft_itoh(int nb, int mode);
+int		arg_length(va_list arg, char c);

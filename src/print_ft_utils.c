@@ -1,5 +1,5 @@
 #include"libftprintf.h"
-char	*itoh(int nb, int mode)
+char	*ft_itoh(int nb, int mode)
 {
 	char 	*res;
 	int		i;

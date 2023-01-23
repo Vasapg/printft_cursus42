@@ -17,7 +17,7 @@ LIBOB = ../libft/*.o
 
 #----------------------------------------PRINTFT MAKE VARS------------------------------------------------
 NAME = libftprintf.a
-FILES = print_ft.c
+FILES = print_ft.c print_ft_utils.c
 CFLAGS = -Wall -Wextra -Werror 
 CC = gcc
 RM = rm -f
@@ -29,10 +29,10 @@ all: ${NAME}
 ${NAME}: ${FOBJ} libft 
 	${CC} ${CFLAGS} -c ${FILES}  
 	ar -rcs ${NAME} ${LIBOB} ${FOBJ}
-	gcc main.c ${NAME}
+	gcc main.c libftprintf.a -o test.out
 
 clean:
-	${RM} ${FOBJ} ${BOBJ}
+	${RM} ${FOBJ} ${BOBJ} test.out
 
 fclean: clean
 	${RM} ${NAME}
