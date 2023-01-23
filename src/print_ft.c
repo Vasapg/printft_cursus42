@@ -13,13 +13,11 @@
 
 int	convert(char c, va_list args)
 {
-	int	error;
-
-	error = 0;
+	//TODO: IMPLEMENTAR FUNCTION PUNTERO, IMPLEMENTAR UNSIGNED INT
 	if (c == 'c')
-		ft_putchar_fd((char)va_arg(args, char*), 1);
+		ft_putchar_fd(va_arg(args, int), 1);
 	if (c == 's')
-		ft_putstr_fd(va_arg(args, char*), 1);
+		ft_putstr_fd(va_arg(args, char *), 1);
 	if (c == 'd' || c == 'i')
 		ft_putnbr_fd(va_arg(args, int), 1);
 	if (c == '%')
@@ -30,9 +28,7 @@ int	convert(char c, va_list args)
 		ft_putstr_fd(itoh(va_arg(args, int), 1), 1);
 	if (c == 'X')
 		ft_putstr_fd(itoh(va_arg(args, int), 0), 1);
-	else
-		error = 1;
-	return (error);
+	return (1);
 }
 
 char	*itoh(int nb, int mode)
@@ -75,16 +71,15 @@ int ft_printf(char const * format, ...)
 	{
 		if (format[i] != '%')
 			ft_putchar_fd(format[i], 1);
+		else if (ft_strchr("cspdiuxX%", format[++i])!=NULL)
+			convert(format[i], args);
 		else
 		{
-			i++;
-			if (convert(format[i], args) == -1)
-				ft_putstr_fd("ERROR: formato invalido\n", 1);
+			ft_putchar_fd(format[i - 1], 1);
+			ft_putchar_fd(format[i], 1);
 		}
 		i++;
 	}
 	va_end(args);
 	return (1);
 }
-
-

@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
 {
 	if (argc < 1)
 		return (-1);
-	char *a = " como estas";
-	unsigned int dia =123344;
-	ft_printf("hola que tal%s hoy es dia %x", a, dia);
+	char a = 'a';
+	int dia =123344;
+	ft_printf("hola que tal%c hoy es dia %x", a, dia);
 	printf("\n");
-	printf("hola que tal%s hoy es dia %x", a, dia);
+	printf("hola que tal%c hoy es dia %x", a, dia);
 	return (1);
 }

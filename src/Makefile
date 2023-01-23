@@ -26,7 +26,7 @@ FOBJ = ${FILES:.c=.o}
 
 all: ${NAME}
 
-${NAME}:libft
+${NAME}: ${FOBJ} libft 
 	${CC} ${CFLAGS} -c ${FILES}  
 	ar -rcs ${NAME} ${LIBOB} ${FOBJ}
 	gcc main.c ${NAME}
