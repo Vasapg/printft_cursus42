@@ -6,54 +6,73 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:54:18 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/24 12:37:42 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:49:56 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libftprintf.h"
+#include"ft_printf.h"
+#include<stdio.h>
+
+int	count_numbers(unsigned long int nb, int base)
+{
+	int	res;
+	int	i;
+
+	res = 0;
+	if (nb <= 0)
+		return (1);
+	i = 0;
+	while (nb != 0)
+	{
+		nb = nb / base;
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_itoh(unsigned long int nb, int mode)
 {
-	char					*res;
-	int						i;
-	unsigned long int		aux;
-	char const				*hex;
+	char		*res;
+	int			i;
 
-	if (nb == 0)
-		return ("0");
-	hex = "0123456789ABCDEF";
-	aux = nb;
-	i = 0;
-	while (aux != 0)
-	{
-		aux = aux / 16;
-		i++;
-	}
+	i = count_numbers(nb, 16);
+	if (mode == 1 || mode == 0)
+		i = count_numbers((unsigned int)nb, 16);
 	res = malloc(sizeof(char) * (i + 1));
+	if (res == NULL)
+		return (NULL);
+	if (nb <= 0)
+	{
+		res[0] = '0';
+		res[1] = '\0';
+	}
 	res[i + 1] = '\0';
 	i--;
 	while (nb != 0)
 	{
-		if (nb % 16 > 9 && mode)
-			res[i--] = ft_tolower(hex[nb % 16]);
+		if (nb % 16 > 9 && (mode == 1 || mode == 2))
+			res[i--] = "0123456789abcdef"[nb % 16];
 		else
-			res[i--] = hex[nb % 16];
+			res[i--] = "0123456789ABCDEF"[nb % 16];
 		nb = nb / 16;
 	}
 	return (res);
 }
 
-char	*ft_itou(unsigned int n)
+char	*ft_utoa(unsigned int n)
 {
-	char			*res;
-	int				i;
-	unsigned int	aux;
+	char	*res;
+	int		i;
 
-	i = 0;
-	aux = n;
+	i = count_numbers(n, 10);
 	res = malloc(sizeof(char) * (i + 1));
 	if (res == NULL)
 		return (NULL);
-	res[i] = '\0';
+	if (n == 0)
+	{
+		res[0] = '0';
+		i--;
+	}
+	res[i + 1] = '\0';
 	i--;
 	while (n != 0)
 	{
