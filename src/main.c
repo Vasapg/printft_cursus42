@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:56:07 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/24 12:10:50 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:33:48 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libftprintf.h"
@@ -29,5 +29,7 @@ int main(int argc, char *argv[])
 	nb1 = ft_printf("el valor del puntero en hexadecimal sera: %p\n", b);
 	nb2 = printf("el valor del puntero en hexadecimal sera: %p\n", b);
 	printf("caracteres leidos por ft_printf:%i\ny por printf: %i\n", nb1, nb2);
+	printf("%s\n", (char *)NULL);
+	ft_printf("%s\n", (char *)NULL);	
 	return (1);
 }

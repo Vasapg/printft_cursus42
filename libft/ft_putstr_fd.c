@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:31:47 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2022/12/28 14:27:29 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:36:40 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libft.h"
@@ -15,4 +15,6 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (s != NULL)
 		write(fd, s, ft_strlen(s));
+	else
+		write(fd, "(null)", ft_strlen("(null)"));	
 }

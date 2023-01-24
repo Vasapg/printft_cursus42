@@ -6,12 +6,12 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/24 12:11:10 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:37:30 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libftprintf.h"
 
-int	convert(char c, va_list args)
+void	convert(char c, va_list args)
 {
 	if (c == 'c')
 		ft_putchar_fd(va_arg(args, int), 1);
@@ -32,12 +32,12 @@ int	convert(char c, va_list args)
 		ft_putstr_fd(ft_itoh(va_arg(args, int), 1), 1);
 	if (c == 'X')
 		ft_putstr_fd(ft_itoh(va_arg(args, int), 0), 1);
-	return (1);
 }
 
 int	arg_length(va_list arg, char c)
 {
 	va_list	arg_aux;
+	char	*str;
 
 	va_copy(arg_aux, arg);
 	if (c == '%' || c == 'c')
@@ -45,11 +45,18 @@ int	arg_length(va_list arg, char c)
 	if (c == 'd' || c == 'i')
 		return (ft_strlen(ft_itoa(va_arg(arg_aux, int))));
 	if (c == 's')
-		return (ft_strlen(va_arg(arg_aux, char *)));
+	{
+		str = va_arg(arg_aux, char *);
+		if (str != NULL)
+			return (ft_strlen(str));
+		else
+			return (ft_strlen("(null)"));
+ 	}
 	if (c == 'x' || c == 'X')
 		return (ft_strlen(ft_itoh(va_arg(arg_aux, int), 1)));
 	if (c == 'p')
-		return (ft_strlen(ft_itoh(va_arg(arg_aux, unsigned long int), 1)) + 2); // + 2 debido al 0x
+		return (ft_strlen(ft_itoh(va_arg(arg_aux, unsigned long int), 1))
+			+ 2);
 	else
 		return (0);
 	va_end(arg_aux);
@@ -80,7 +87,7 @@ int	ft_printf(char const *format, ...)
 		{
 			ft_putchar_fd(format[i - 1], 1);
 			ft_putchar_fd(format[i], 1);
-			length+=2;
+			length += 2;
 		}
 		i++;
 	}
