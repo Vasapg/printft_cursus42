@@ -6,68 +6,99 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 18:18:25 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:49:24 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libftprintf.h"
+#include"ft_printf.h"
 
-int	convert(char c, va_list args)
+void	convert(char c, va_list args)
 {
-	//TODO: IMPLEMENTAR FUNCTION PUNTERO, IMPLEMENTAR UNSIGNED INT
+	char	*str;
+
+	str = NULL;
 	if (c == 'c')
 		ft_putchar_fd(va_arg(args, int), 1);
 	if (c == 's')
 		ft_putstr_fd(va_arg(args, char *), 1);
+	if (c == 'p')
+	{
+		ft_putstr_fd("0x", 1);
+		str = ft_itoh(va_arg(args, unsigned long int), 2);
+	}
 	if (c == 'd' || c == 'i')
 		ft_putnbr_fd(va_arg(args, int), 1);
 	if (c == '%')
 		ft_putchar_fd(c, 1);
 	if (c == 'u')
-		ft_putnbr_fd(va_arg(args, unsigned int), 1);
+		str = ft_utoa(va_arg(args, unsigned int));
 	if (c == 'x')
-		ft_putstr_fd(ft_itoh(va_arg(args, int), 1), 1);
+		str = ft_itoh(va_arg(args, int), 1);
 	if (c == 'X')
-		ft_putstr_fd(ft_itoh(va_arg(args, int), 0), 1);
-	return (1);
+		str = ft_itoh(va_arg(args, int), 0);
+	if (str != NULL)
+	{
+		ft_putstr_fd(str, 1);
+		free(str);
+	}
 }
 
 int	arg_length(va_list arg, char c)
 {
+	va_list	arg_aux;
+	char	*str;
+	int		res;
+
+	str = NULL;
+	va_copy(arg_aux, arg);
 	if (c == '%' || c == 'c')
 		return (1);
-	if (c == 'd' || c== 'i')
-		return (ft_strlen(ft_itoa(va_arg(arg, int))));
+	if (c == 'd' || c == 'i')
+		str = ft_itoa(va_arg(arg_aux, int));
 	if (c == 's')
-		return (ft_strlen(va_arg(arg, char *)));
+	{
+		str = va_arg(arg_aux, char *);
+		if (str != NULL)
+			return (ft_strlen(str));
+		return (ft_strlen("(null)"));
+	}
 	if (c == 'x' || c == 'X')
-		return (ft_strlen(ft_itoh(va_arg(arg, int), 1)));
-	else
-		return (0);
+		str = (ft_itoh(va_arg(arg_aux, int), 1));
+	if (c == 'p')
+		str = ft_itoh(va_arg(arg_aux, unsigned long int), 2);
+	if (c == 'u')
+		str = ft_utoa(va_arg(arg_aux, unsigned int));
+	res = ft_strlen(str);
+	if (c == 'p')
+		res += 2;
+	free(str);
+	va_end(arg_aux);
+	return (res);
 }
 
-int ft_printf(char const * format, ...)
+int	ft_printf(char const *format, ...)
 {
-	va_list args;
-	int	i;
+	va_list	args;
+	int		i;
+	int		length;
 
+	length = 0;
 	va_start(args, format);
 	i = 0;
 	while (format[i])
 	{
 		if (format[i] != '%')
-			ft_putchar_fd(format[i], 1);
-		else if (ft_strchr("cspdiuxX%", format[++i])!=NULL)
 		{
-			//TODO: CALL LENGHT FUNCTION FOR VA_COPY
-			convert(format[i], args);
+			ft_putchar_fd(format[i], 1);
+			length++;
 		}
-		else
+		else if (format[i] == '%'
+			&& ft_strchr("cspdiuxX%", format[i + 1]) != NULL)
 		{
-			ft_putchar_fd(format[i - 1], 1);
-			ft_putchar_fd(format[i], 1);
+			length += arg_length(args, format[++i]);
+			convert(format[i], args);
 		}
 		i++;
 	}
 	va_end(args);
-	return (1);
+	return (length);
 }

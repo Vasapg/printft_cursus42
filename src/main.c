@@ -6,20 +6,20 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:56:07 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 18:18:38 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:43:52 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libftprintf.h"
+#include"ft_printf.h"
 #include<stdio.h>
+#include<limits.h>
 
 int main(int argc, char *argv[])
 {
 	if (argc < 1)
 		return (-1);
-	char a = 'a';
-	int dia =123344;
-	ft_printf("hola que tal%c hoy es dia %x", a, dia);
-	printf("\n");
-	printf("hola que tal%c hoy es dia %x", a, dia);
+	unsigned int a = -10;
+	int nb1 = ft_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%%%c%%\n", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0, 0);
+	int nb2 = printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%%%c%%\n", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0, 0);
+	printf("caracteres leidos por ft_printf:%i\ny por printf: %i\n", nb1, nb2);
 	return (1);
 }

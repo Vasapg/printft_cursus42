@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 12:09:30 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/20 18:09:38 by vsanz-ar         ###   ########.fr       */
+/*   Created: 2022/11/24 13:31:47 by vsanz-ar          #+#    #+#             */
+/*   Updated: 2023/01/24 15:34:56 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"../libft/libft.h"
-#include<stdarg.h>
+#include"libft.h"
 
-int		ft_printf(char const *, ...);
-int		convert(char c, va_list args);
-char	*ft_itoh(int nb, int mode);
-int		arg_length(va_list arg, char c);
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s != NULL)
+		write(fd, s, ft_strlen(s));
+	else
+		write(fd, "(null)", ft_strlen("(null)"));
+}

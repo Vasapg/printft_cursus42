@@ -6,14 +6,14 @@
 #    By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 13:51:49 by vsanz-ar          #+#    #+#              #
-#    Updated: 2023/01/20 15:13:57 by vsanz-ar         ###   ########.fr        #
+#    Updated: 2023/01/24 15:41:06 by vsanz-ar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #----------------------------------------LIBFT MAKE VARS------------------------------------------------
 
-LIBPATH = ../libft
-LIBOB = ../libft/*.o
+LIBPATH = ./libft
+LIBOB = ./libft/*.o
 
 #----------------------------------------PRINTFT MAKE VARS------------------------------------------------
 NAME = libftprintf.a
@@ -29,7 +29,7 @@ all: ${NAME}
 ${NAME}: ${FOBJ} libft 
 	${CC} ${CFLAGS} -c ${FILES}  
 	ar -rcs ${NAME} ${LIBOB} ${FOBJ}
-	gcc main.c libftprintf.a -o test.out
+	gcc main.c ${NAME} -o test.out
 
 clean:
 	${RM} ${FOBJ} ${BOBJ} test.out
