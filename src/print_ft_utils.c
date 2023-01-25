@@ -14,10 +14,8 @@
 
 int	count_numbers(unsigned long int nb, int base)
 {
-	int	res;
 	int	i;
 
-	res = 0;
 	if (nb <= 0)
 		return (1);
 	i = 0;
