@@ -1,2 +1,2 @@
 # printft_cursus42
-Simulating the printf function of C
+A limited version of the original printf function from c, works with the flags "%diupxX"
