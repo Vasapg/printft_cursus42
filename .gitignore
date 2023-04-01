@@ -2,3 +2,5 @@
 *.o
 *.a
 src/main.c
+.vs*
+*.gch*

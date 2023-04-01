@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/26 14:03:05 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:43:07 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"ft_printf.h"
@@ -39,6 +39,7 @@ int	argtos(char c, va_list args)
 		str = ft_itoh(va_arg(args, int), 0);
 	return (print_and_free(str, c));
 }
+
 // print and free a str, taking in account pointer format
 int	print_and_free(char *str, char c)
 {
