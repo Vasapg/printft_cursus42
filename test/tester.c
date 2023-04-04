@@ -6,7 +6,7 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 13:22:22 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/04/01 16:03:34 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:06:39 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include<stdio.h>
@@ -117,9 +117,9 @@ void testingInt()
 	num2 = ft_printf("%i", (void *)0);
 	compare(num1, num2);
 
-	num1 = printf("%i", 02323);
+	num1 = printf("%i", 'z');
 	printf("\n");
-	num2 = ft_printf("%i", 02323);
+	num2 = ft_printf("%i", 'z');
 	compare(num1, num2);
 
 	printf("\n\nFIN TESTERS DE %%i!!!\n\n");

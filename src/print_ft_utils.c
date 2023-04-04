@@ -6,11 +6,10 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:54:18 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/01/26 13:59:57 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:02:03 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"ft_printf.h"
-#include<stdio.h>
 
 int	count_numbers(unsigned long int nb, int base)
 {

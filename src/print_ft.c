@@ -6,11 +6,10 @@
 /*   By: vsanz-ar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:45:46 by vsanz-ar          #+#    #+#             */
-/*   Updated: 2023/04/01 13:43:07 by vsanz-ar         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:28:19 by vsanz-ar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"ft_printf.h"
-#include<stdio.h>
 
 // retrieve an argument as a string, no matter its type
 int	argtos(char c, va_list args)
@@ -72,7 +71,7 @@ int	ft_printf(char const *format, ...)
 		if (format[i] == '%' && format[i + 1]
 			&& ft_strchr("cspdiuxX%", format[i + 1]) != NULL)
 			length += argtos(format[++i], args);
-		else
+		else if (format[i] != '%')
 		{
 			ft_putchar_fd(format[i], 1);
 			length++;
